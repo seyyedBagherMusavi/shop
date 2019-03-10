@@ -24,6 +24,9 @@ Year: 2019
 */
 @Configuration
 @EnableTransactionManagement
+@PropertySource({
+        "classpath:database.properties"
+})
 @ComponentScan(basePackages = { "com.kahkeshan" })
 public class HibernateConfig {
     @Autowired
