@@ -11,6 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -29,8 +30,17 @@ Year: 2019
 })
 @ComponentScan(basePackages = { "com.kahkeshan" })
 public class HibernateConfig {
+
     @Autowired
     private Environment environment;
+   /*  @Bean
+     @Autowired
+     public DataSourceTransactionManager transactionManager(DataSource ds) {
+     DataSourceTransactionManager txManager = new DataSourceTransactionManager();
+     txManager.setDataSource(ds);
+     return txManager;
+     }*/
+
 
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
@@ -50,6 +60,7 @@ public class HibernateConfig {
         dataSource.setUsername(environment.getRequiredProperty("jdbc.username"));
         dataSource.setPassword(environment.getRequiredProperty("jdbc.password"));
         return dataSource;
+    
     }
     private final Properties hibernateProperties() {
         Properties hibernateProperties = new Properties();
@@ -57,6 +68,14 @@ public class HibernateConfig {
         hibernateProperties.setProperty("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
         hibernateProperties.setProperty("hibernate.format_sql", environment.getRequiredProperty("hibernate.format_sql"));
         hibernateProperties.setProperty("hibernate.hbm2ddl.auto", environment.getRequiredProperty("hibernate.hbm2ddl.auto"));
+        hibernateProperties.setProperty(
+                "hibernate.connection.CharSet", environment.getRequiredProperty("hibernate.connection.CharSet"));
+        hibernateProperties.setProperty(
+                "hibernate.connection.characterEncoding", environment.getRequiredProperty("hibernate.connection.characterEncoding"));
+        hibernateProperties.setProperty(
+                "hibernate.connection.useUnicode", environment.getRequiredProperty("hibernate.connection.useUnicode"));
+
+
         return hibernateProperties;
     }
     @Bean

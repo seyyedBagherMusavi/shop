@@ -1,5 +1,7 @@
 package com.kahkeshan.entities;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.persistence.*;
 import javax.validation.constraints.Past;
 import java.util.Date;
@@ -9,27 +11,39 @@ import java.util.Date;
 @Table(name = "product")
 public class Product {
 
-
     @Id
-    @Column(name = "Code", length = 20, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+
     private String code;
 
-    @Column(name = "Name", length = 255, nullable = false)
+
     private String name;
 
-    @Column(name = "Price", nullable = false)
+
     private double price;
 
     @Lob
-    @Column(name = "Image", length = Integer.MAX_VALUE, nullable = true)
+    @Column(name = "Image", length = Integer.MAX_VALUE,nullable = true)
     private byte[] image;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "Create_Date", nullable = false)
-    @Past
+    @Column(name = "Create_Date")
     private Date createDate;
 
+    @Transient
+    private MultipartFile fileData;
+
     public Product() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCode() {
@@ -72,5 +86,12 @@ public class Product {
         this.image = image;
     }
 
+    public MultipartFile getFileData() {
+        return fileData;
+    }
+
+    public void setFileData(MultipartFile fileData) {
+        this.fileData = fileData;
+    }
 }
 

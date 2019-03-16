@@ -6,35 +6,43 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class ProductDaoImp implements ProductDao {
     @Autowired
     SessionFactory sessionFactory;
 
     @Override
-    public void save(Product person) {
-        sessionFactory.openSession().save(person);
+    public void save(Product product) {
+        sessionFactory.getCurrentSession().save(product);
     }
 
     @Override
     public void update(Product person) {
-        sessionFactory.openSession().update(person);
+        sessionFactory.getCurrentSession().update(person);
     }
 
     @Override
-    public void delete(String code) {
+    public void delete(int id) {
         Session session = sessionFactory.getCurrentSession();
-        Product product = session.byId(Product.class).load(code);
+        Product product = session.get(Product.class,id);
         session.delete(product);
 
     }
 
     @Override
     public List<Product> selectAll() {
-        Query query = sessionFactory.openSession().createQuery("from Product");
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Product");
         List<Product> persons = query.list();
         return persons;
+    }
+
+    @Override
+    public Product findByCode(int code) {
+        return sessionFactory.openSession().load(Product.class,code);
     }
 }

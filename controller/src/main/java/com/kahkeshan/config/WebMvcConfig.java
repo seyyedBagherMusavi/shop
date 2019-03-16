@@ -38,7 +38,7 @@ import java.util.Properties;
 @Configuration
 @EnableAsync
 @EnableWebMvc
-@ComponentScan("com.kahkeshan")
+@ComponentScan("com")
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
     @Autowired
@@ -59,14 +59,21 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     @Bean
     public ViewResolver beanNameViewResolver() {
         BeanNameViewResolver resolver = new BeanNameViewResolver();
+
         return resolver;
     }
-
+    @Bean(name = "multipartResolver")
+    public CommonsMultipartResolver createMultipartResolver() {
+        CommonsMultipartResolver resolver=new CommonsMultipartResolver();
+        resolver.setDefaultEncoding("utf-8");
+        return resolver;
+    }
     @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setViewClass(JstlView.class);
         viewResolver.setPrefix("/WEB-INF/views/");
+        viewResolver.setContentType("text/html;charset=UTF-8");
         viewResolver.setSuffix(".jsp");
 
         return viewResolver;
@@ -75,7 +82,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
 
-        registry.addResourceHandler("/static/**").addResourceLocations("/static/");
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 
     }
 
