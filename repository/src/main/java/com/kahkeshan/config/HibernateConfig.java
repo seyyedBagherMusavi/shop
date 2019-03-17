@@ -60,7 +60,7 @@ public class HibernateConfig {
         dataSource.setUsername(environment.getRequiredProperty("jdbc.username"));
         dataSource.setPassword(environment.getRequiredProperty("jdbc.password"));
         return dataSource;
-    
+
     }
     private final Properties hibernateProperties() {
         Properties hibernateProperties = new Properties();
