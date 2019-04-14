@@ -64,19 +64,7 @@ public class ProductController {
         model.addAttribute("productList",productList);
         return "products";
     }
-    @RequestMapping(value = { "/productImage" }, method = RequestMethod.GET)
-    public void productImage(HttpServletRequest request, HttpServletResponse response, Model model,
-                             @RequestParam("id") int id) throws IOException {
-        Product product = null;
-        if (id != 0) {
-            product = productService.findByCode(id);
-        }
-        if (product != null && product.getImage() != null) {
-            response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
-            response.getOutputStream().write(product.getImage());
-        }
-        response.getOutputStream().close();
-    }
+
 
 
     @GetMapping("/update")

@@ -54,7 +54,7 @@
             <td><c:out value="${product.code}" /></td>
             <td><c:out value="${product.name}" /></td>
             <td> <img class="product-image"
-                      src="<c:url value='/admin/productImage?id=${product.id}'/>"  height="100" width="100"/></td>
+                      src="<c:url value='/home/productImage?id=${product.id}'/>"  height="100" width="100"/></td>
             <td><c:out value="${product.price}" /></td>
 
             <td>
