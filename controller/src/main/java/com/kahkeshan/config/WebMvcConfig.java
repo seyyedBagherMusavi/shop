@@ -101,6 +101,10 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         configurer.defaultContentType(new MediaType(
                 MediaType.APPLICATION_JSON, parameterMap));
     }
-
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedMethods("GET", "POST");
+    }
 
 }

@@ -60,9 +60,14 @@
                     var xhttp;
                     xhttp=new XMLHttpRequest();
                     xhttp.onreadystatechange = function() {
-
                         if (this.readyState == 4 && this.status == 200) {
-                            alert(this.responseText)
+                            if(this.responseText.includes("succesfull")){
+                                document.getElementById("buyState").value="your buy is complete"
+                                alert("your buy is complete");
+                                window.location= "http://localhost:8080/controller_war_exploded/";
+                            }else{
+                                document.getElementById("buyState").value="not enough mony or etc"
+                            }
                         }
                     };
                     xhttp.open("GET", "http://localhost:8081/rest/balance/"+${user.cardNumber}+"/"+${orderObj.price}, true);
