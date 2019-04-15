@@ -63,7 +63,7 @@ public class MySimpleUrlAuthenticationSuccessHandler
         }
 
         if (isUser) {
-            return "/homepage.html";
+            return "/buy";
         } else if (isAdmin) {
             return "/admin";
         } else {

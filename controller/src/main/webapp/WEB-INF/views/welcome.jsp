@@ -104,7 +104,10 @@
 				</table>
 			</div>
 			<c:out value="price: ${orderObj.price}"></c:out>
-		</div>
+            <c:url var="buy" value="/buy">
+            </c:url>
+            <a href="${buy}">buy</a>
+        </div>
 
 </body>
 </html>

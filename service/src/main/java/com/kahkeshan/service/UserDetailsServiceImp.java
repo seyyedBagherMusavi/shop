@@ -35,4 +35,8 @@ public class UserDetailsServiceImp implements UserDetailsService {
         }
         return builder.build();
     }
+
+    public User findUserByUsername(String username) {
+        return userDetailsDao.findUserByUsername(username);
+    }
 }

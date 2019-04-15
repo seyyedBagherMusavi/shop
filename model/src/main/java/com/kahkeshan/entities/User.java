@@ -24,6 +24,8 @@ public class User {
     @Column(name = "ENABLED", nullable = false)
     private boolean enabled;
 
+    private int cardNumber;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<Authorities> authorities = new HashSet<>();
 
@@ -57,5 +59,13 @@ public class User {
 
     public void setAuthorities(Set<Authorities> authorities) {
         this.authorities = authorities;
+    }
+
+    public int getCardNumber() {
+        return cardNumber;
+    }
+
+    public void setCardNumber(int cardNumber) {
+        this.cardNumber = cardNumber;
     }
 }
